@@ -181,11 +181,35 @@ describe('Gilded Rose', function () {
         expect(thing.quality).to.equal(0);
     });
 
+    it('Conjured Mana Cake degrades twice as fast (within sell-in date)', function () {
+        const thing: Item = new Item('Conjured Mana Cake', 5, 6);
+        const gildedRose = new GildedRose([thing]);
+        gildedRose.updateQuality();
+        expect(thing.quality).to.equal(4);
+    });
 
 
+    it('Conjured Mana Cake degrades twice as fast (after sell-in date)', function () {
+        const thing: Item = new Item('Conjured Mana Cake', -1, 6);
+        const gildedRose = new GildedRose([thing]);
+        gildedRose.updateQuality();
+        expect(thing.quality).to.equal(2);
+    });
+
+    it('Conjured Mana Cake  quality > 0 within sell-in date', function () {
+        const thing: Item = new Item('Conjured Mana Cake', 5, 1);
+        const gildedRose = new GildedRose([thing]);
+        gildedRose.updateQuality();
+        expect(thing.quality).to.equal(0);
+    });
 
 
-
+    it('Conjured Mana Cake  quality > 0 after sell-in date', function () {
+        const thing: Item = new Item('Conjured Mana Cake', -1, 3);
+        const gildedRose = new GildedRose([thing]);
+        gildedRose.updateQuality();
+        expect(thing.quality).to.equal(0);
+    });
 
 
 
